@@ -1,0 +1,42 @@
+import random
+
+class Game:
+    def __init__(self):
+        self.board = [[0 for _ in range(3)] for _ in range(3)]
+
+    def play(self):
+        for _ in range(9):
+            move = random.randint(0, 8)
+            row = move // 3
+            col = move % 3
+
+            if self.board[row][col] == 0:
+                self.board[row][col] = 1
+                break
+
+    def is_winner(self):
+        for row in range(3):
+            if self.board[row][0] == self.board[row][1] == self.board[row][2] != 0:
+                return self.board[row][0]
+
+        for col in range(3):
+            if self.board[0][col] == self.board[1][col] == self.board[2][col] != 0:
+                return self.board[0][col]
+
+        if self.board[0][0] == self.board[1][1] == self.board[2][2] != 0:
+            return self.board[0][0]
+
+        if self.board[0][2] == self.board[1][1] == self.board[2][0] != 0:
+            return self.board[0][2]
+
+        return 0
+
+
+def main():
+    game = Game()
+    game.play()
+    print(game.is_winner())
+
+
+if __name__ == "__main__":
+    main()
